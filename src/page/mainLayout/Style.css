@@ -1,0 +1,23 @@
+.logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+[data-theme="dark"] .site-layout .site-layout-background {
+  background: #141414;
+}
+.header {
+  background: #bfbfbf;
+  padding: 0px 8px 3px 5px;
+}
+.header .ant-page-header-heading-extra {
+  margin: 0px;
+}
+.menu-profile {
+  background: transparent;
+  border-bottom: none;
+}
