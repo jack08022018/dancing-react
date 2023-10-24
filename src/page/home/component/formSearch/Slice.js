@@ -16,7 +16,7 @@ export const getAllDataAsync = createAsyncThunk('formSearch/getAllData',
     try {
       const response = await axios({
         method: 'post',
-        url: `/api/getProductData`,
+        url: `/jpa/api/getProductData`,
       });
       return response.data;
     } catch (e) {
@@ -34,6 +34,7 @@ export const Slice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAllDataAsync.fulfilled, (state, action) => {
+        console.log(action.payload)
         state.ownerArray = addKeyToList(action.payload.ownerArray);
         state.categoryArray = addKeyToList(action.payload.categoryArray);
         state.initializing = false;

@@ -32,7 +32,7 @@ function useFormSearch() {
 
   // init
   useEffect(() => {
-    // dispatch(getAllDataAsync());
+    dispatch(getAllDataAsync());
   }, [dispatch]);
 
   const [form] = Form.useForm();
@@ -44,6 +44,7 @@ function useFormSearch() {
   }
 
   const handleSearch = values => {
+    console.log(values)
     values.pageSize = constants.PAGE_SIZE;
     values.currentPage = 0;
     setSearchParams(values);
@@ -53,7 +54,7 @@ function useFormSearch() {
   // const requiredFieldRule = [{ required: true, message: 'Required Field' }];
 
   const FormSearch = () => (
-    // initializing ? <div>Loading...</div> :
+    initializing ? <div>Loading...</div> :
 
     <Card bodyStyle={{ padding: "24px 24px 0px 24px"}}>
       <Form form={form} name="product-form" onFinish={handleSearch}

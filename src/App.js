@@ -1,61 +1,54 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './App.css';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
-import './App.css';
 import Login from './page/login/LoginPage';
 import StudentInfo from './page/studentInfo/StudentInfoPage';
+import Home from './page/home/HomePage';
 
-import { useState } from 'react';
-import Home from './pages/Home';
-import About from './pages/About';
-import Products from './pages/Products';
-import Error from './pages/Error';
-import SharedLayout from './pages/SharedLayout';
-import SingleProduct from './pages/SingleProduct';
-import Dashboard from './pages/Dashboard';
-import LoginNew from './pages/Login';
-import ProtectedRoute from './pages/ProtectedRoute';
-import SharedProductLayout from './pages/SharedProductLayout';
+// import Home from './page/Home';
+import About from './page/About';
+import Error from './page/Error';
+import MainLayout from './layouts/mainLayout/MainLayout';
 
 function App() {
+  const [user, setUser] = useState(null);
   return (
     <Provider store={store}>
-      <Router>
+      <BrowserRouter>
         <Routes>
-        <Route exact path="/login" key={0} element={<div className="center-content"><Login /></div>} />
-          <Route exact path="/info" key={1} element={<div className="center-content"><StudentInfo /></div>} />
+          {/* <Route path='/' element={<SharedLayout />}>
+            <Route index element={<Home />} />
+            <Route path='about' element={<About />} />
+
+            <Route path='products' element={<SharedProductLayout />}>
+              <Route index element={<Products />} />
+              <Route path=':productId' element={<SingleProduct />} />
+            </Route>
+
+            <Route path='login' element={<LoginNew setUser={setUser}></LoginNew>} />
+            <Route
+              path='dashboard'
+              element={
+                <ProtectedRoute user={user}>
+                  <Dashboard user={user} />
+                </ProtectedRoute>
+              }
+            />
+            <Route path='*' element={<Error />} />
+          </Route> */}
+          <Route path='/' element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path='login' element={<Login />} />
+            <Route path='about' element={<About />} />
+
+            <Route path='*' element={<Error />} />
+          </Route>
         </Routes>
-      </Router>
+      </BrowserRouter>
     </Provider>
   );
-
-  // const [user, setUser] = useState(null);
-  // return (
-  //   <BrowserRouter>
-  //     <Routes>
-  //       <Route path='/' element={<SharedLayout />}>
-  //         <Route index element={<Home />} />
-  //         <Route path='about' element={<About />} />
-
-  //         <Route path='products' element={<SharedProductLayout />}>
-  //           <Route index element={<Products />} />
-  //           <Route path=':productId' element={<SingleProduct />} />
-  //         </Route>
-
-  //         <Route path='login' element={<Login setUser={setUser}></Login>} />
-  //         <Route
-  //           path='dashboard'
-  //           element={
-  //             <ProtectedRoute user={user}>
-  //               <Dashboard user={user} />
-  //             </ProtectedRoute>
-  //           }
-  //         />
-  //         <Route path='*' element={<Error />} />
-  //       </Route>
-  //     </Routes>
-  //   </BrowserRouter>
-  // );
 }
 
 export default App;

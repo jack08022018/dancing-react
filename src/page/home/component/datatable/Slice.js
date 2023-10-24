@@ -27,7 +27,7 @@ export const getUsersAsync = createAsyncThunk('datatable/getUsers',
       console.log(params);
       const response = await axios({
         method: 'post',
-        url: `/api/products`,
+        url: `/jpa/api/products`,
         data: params
       });
       return response.data;
