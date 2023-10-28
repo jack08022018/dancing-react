@@ -21,7 +21,7 @@ export default function LoginPage() {
   
   return (
     // isLoginSuccess ? navigate('/info') :
-    <Row type="flex" justify="center" align="top" style={{minHeight: '100vh', with: '100%', background: 'white', padding: '2px'}}>
+    <Row type="flex" justify="center" align="middle" style={{minHeight: '100vh', with: '100%', background: 'white', padding: '2px'}}>
       <Card>
         <Form
           name="normal_"

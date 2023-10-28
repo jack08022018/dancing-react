@@ -27,6 +27,7 @@ export const loginAsync = createAsyncThunk('student/login',
     } catch (e) {
       console.log(e)
       Common.handleError(e);
+      throw e;
     }
   }
 );

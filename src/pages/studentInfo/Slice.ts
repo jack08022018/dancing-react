@@ -62,9 +62,7 @@ export const getStudentDataAsync = createAsyncThunk('student/getStudentData',
       return distinctList;
       // return distinctList;
     } catch (e) {
-      console.log(e)
-      // Common.handleError(e);
-      return Common.handleError(e);
+      Common.handleError(e);
     }
   }
 );

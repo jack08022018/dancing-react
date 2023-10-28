@@ -25,27 +25,10 @@ export default function StudentInfoPage() {
     class: selectedClass.idClass
   };
 
-  // init
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const result = await dispatch(getStudentDataAsync({
-  //       mobile: localStorage.getItem('username'),
-  //       name: 'jack'
-  //     }));
-  //     if (result.payload.status === 401) {
-  //       navigate('/login');
-  //     }
-  //   };
-  
-  //   fetchData();
-  // }, [dispatch, navigate]);
-
   // INIT
   useEffect(() => {
-    console.log('INIT!')
     dispatch(getStudentDataAsync({
       mobile: localStorage.getItem('username'),
-      // mobile: '0767786939',
       name: 'jack'
     }));
   }, [dispatch]);
@@ -61,7 +44,8 @@ export default function StudentInfoPage() {
     initializing ? <div>Loading...</div> :
 
     <Row type="flex" justify="center" align="top" 
-      style={{minHeight: '100vh', background: '#d6d6d6', width: '350px', padding: '2px'}} >
+      className='center-content'
+      style={{minHeight: '100vh', background: '#d6d6d6', width: '350px', padding: '2px', textAlign: 'center'}} >
       <Card>
         <Form name="normal_" className="-form"
           initialValues={initialValues}

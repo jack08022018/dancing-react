@@ -3,6 +3,7 @@ import { message } from 'antd';
 // const navigate = useNavigate();
 
 export function handleError(e) {
+  console.log(e);
   let msgError = '';
 
   // error before send request
@@ -20,7 +21,8 @@ export function handleError(e) {
     }
     if(status === 401) {
       msgError = typeof e.response.data === 'string' ? e.response.data : e.response.data.message;
-      // navigate('/login');
+      document.location.href = '/login';
+      throw e;
     }
   }
   message.open({
