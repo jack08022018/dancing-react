@@ -6,12 +6,21 @@ import * as Common from '../../app/CommonUtils';
 import axios from 'axios';
 
 const initialState = {
-  classList: [],
+  classList: [
+    {
+      name: '',
+      mobile: '',
+      idClass: 0,
+      data: []
+    }
+  ],
   selectedClass: {
     name: '',
     mobile: '',
-    idClass: 0
+    idClass: 0,
+    data: []
   },
+  idClass: 0,
   initializing: true,
   isAuthorize: true
 };
@@ -71,15 +80,29 @@ export const Slice = createSlice({
   name: 'StudentInfo',
   initialState,
   reducers: {
+    classChange: (state, action) => {
+      console.log(`Class ID: ${action.payload}`);
+      const selectedClassIndex = 2; // You can use the appropriate index
+      state.idClass = action.payload;
+      // const classList = state.classList;
+      // let info = classList.filter(s => {
+      //   let a = s['idClass'] === action.payload;
+      //   return a;
+      // });
+      // console.log(info);
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(getStudentDataAsync.fulfilled, (state, action) => {
         state.classList = Common.addKeyToList(action.payload);
-        state.selectedClass = action.payload[0];
+        state.selectedClass = (state.classList)[0];
+        state.idClass = state.selectedClass.idClass;
         state.initializing = false;
       })
   },
 });
+
+export const { classChange } = Slice.actions;
 
 export default Slice.reducer;

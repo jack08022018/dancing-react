@@ -4,7 +4,7 @@ import 'antd/dist/reset.css';
 import './Style.css';
 import { Row, Card, Col, Form, Input, Select, Button } from 'antd';
 import { UserOutlined, MobileOutlined } from '@ant-design/icons';
-import { getStudentDataAsync } from './Slice';
+import { getStudentDataAsync, classChange } from './Slice';
 import { useNavigate } from 'react-router-dom';
 
 const { Option } = Select;
@@ -12,7 +12,10 @@ const { Option } = Select;
 export default function StudentInfoPage() {
   const { classList, selectedClass, initializing } = useAppSelector((rootState) => {
     let classList = rootState.studentInfo.classList;
-    let selectedClass = rootState.studentInfo.selectedClass;
+    let idClass = rootState.studentInfo.idClass;
+    let selectedClass = rootState.studentInfo.classList.filter(s => s.idClass === idClass);
+    selectedClass = selectedClass.length > 0 ? selectedClass[0] : null;
+    // let selectedClass = rootState.studentInfo.selectedClass;
     let initializing = rootState.studentInfo.initializing;
     return { classList, selectedClass, initializing };
   });
@@ -40,6 +43,11 @@ export default function StudentInfoPage() {
     navigate('/login');
   };
 
+  const handleClassChange = (value) => {
+    console.log(`Selected class ID: ${value}`);
+    dispatch(classChange(value));
+  };
+
   return (
     initializing ? <div>Loading...</div> :
 
@@ -60,7 +68,7 @@ export default function StudentInfoPage() {
             <Input prefix={<MobileOutlined className="site-form-item-icon" />} readOnly={true} />
           </Form.Item>
           <Form.Item label="Lớp" name="class" colon={false}>
-              <Select>
+              <Select onChange={handleClassChange} value={selectedClass.idClass}>
                 {classList.map((item, index) => (
                   <Option key={index} value={item.idClass}>
                     {item.songTitle}
