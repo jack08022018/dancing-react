@@ -12,10 +12,12 @@ const { Option } = Select;
 export default function StudentInfoPage() {
   const { classList, selectedClass, initializing } = useAppSelector((rootState) => {
     let classList = rootState.studentInfo.classList;
-    let idClass = rootState.studentInfo.idClass;
-    let selectedClass = rootState.studentInfo.classList.filter(s => s.idClass === idClass);
-    selectedClass = selectedClass.length > 0 ? selectedClass[0] : null;
-    // let selectedClass = rootState.studentInfo.selectedClass;
+    let idClass = classList.length > 0 ? rootState.studentInfo.idClass : null;
+    let selectedClass = null;
+    if(idClass !== null) {
+      selectedClass = rootState.studentInfo.classList.filter(s => s.idClass === idClass);
+      selectedClass = selectedClass.length > 0 ? selectedClass[0] : null;
+    }
     let initializing = rootState.studentInfo.initializing;
     return { classList, selectedClass, initializing };
   });
@@ -23,9 +25,9 @@ export default function StudentInfoPage() {
   const navigate = useNavigate();
 
   let initialValues = {
-    studentName: selectedClass.name, 
-    mobile: selectedClass.mobile,
-    class: selectedClass.idClass
+    studentName: selectedClass !== null ? selectedClass.name : '', 
+    mobile: selectedClass !== null ? selectedClass.mobile : '',
+    class: selectedClass !== null ? selectedClass.idClass : ''
   };
 
   // INIT
@@ -48,11 +50,20 @@ export default function StudentInfoPage() {
     dispatch(classChange(value));
   };
 
-  return (
-    initializing ? <div>Loading...</div> :
+  if(initializing) {
+    return (
+      <div>Loading...</div>
+    );
+  }
+  if(selectedClass === null) {
+    return (
+      <div>No class...</div>
+    );
+  }
 
+  return (
     <Row type="flex" justify="center" align="top" 
-      className='center-content'
+      className='top-content mobile-content'
       style={{minHeight: '100vh', background: '#d6d6d6', width: '350px', padding: '2px', textAlign: 'center'}} >
       <Card>
         <Form name="normal_" className="-form"

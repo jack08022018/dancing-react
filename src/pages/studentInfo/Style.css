@@ -10,3 +10,18 @@
 .login-form-button {
     width: 100%;
 }
+
+.top-content {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    background-color: white;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+@media only screen and (max-width: 414px) {
+    .mobile-content {
+        width: 100% !important; 
+    }
+}
