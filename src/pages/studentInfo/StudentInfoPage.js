@@ -66,11 +66,11 @@ export default function StudentInfoPage() {
       className='top-content mobile-content'
       style={{minHeight: '100vh', background: '#d6d6d6', width: '350px', padding: '2px', textAlign: 'center'}} >
       <Card>
-        <Form name="normal_" className="-form"
+        <Form name="normal_" className="mobile-content"
           initialValues={initialValues}
         >
           <Form.Item style={{ textAlign: 'right' }}>
-          <Button type="primary" className="-form-button" onClick={handleLogout}>Logout</Button>
+            <Button type="primary" className="-form-button" onClick={handleLogout}>Logout</Button>
           </Form.Item>
           <Form.Item label="Họ tên" name="studentName" colon={false} >
             <Input prefix={<UserOutlined className="site-form-item-icon" />} readOnly={true} />
